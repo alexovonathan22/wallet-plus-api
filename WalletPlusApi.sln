@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31613.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletPlusApi", "WalletPlusApi\WalletPlusApi.csproj", "{D44E1B92-7579-4D86-9D2E-43351D79E985}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletPlusApi.Infrastructure", "WalletPlusApi.Infrastructure\WalletPlusApi.Infrastructure.csproj", "{5591C928-52F8-4FF8-9CFA-A17EF6F24D0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletPlusApi.Tests", "WalletPlusApi.Tests\WalletPlusApi.Tests.csproj", "{A5BF53BF-A12A-4C5F-B9F5-84936BF8242A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletPlusApi.Core", "WalletPlusApi.Core\WalletPlusApi.Core.csproj", "{9A170181-DE17-44AF-A5B2-449005F82E5C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D44E1B92-7579-4D86-9D2E-43351D79E985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D44E1B92-7579-4D86-9D2E-43351D79E985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D44E1B92-7579-4D86-9D2E-43351D79E985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D44E1B92-7579-4D86-9D2E-43351D79E985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5591C928-52F8-4FF8-9CFA-A17EF6F24D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5591C928-52F8-4FF8-9CFA-A17EF6F24D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5591C928-52F8-4FF8-9CFA-A17EF6F24D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5591C928-52F8-4FF8-9CFA-A17EF6F24D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5BF53BF-A12A-4C5F-B9F5-84936BF8242A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5BF53BF-A12A-4C5F-B9F5-84936BF8242A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5BF53BF-A12A-4C5F-B9F5-84936BF8242A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5BF53BF-A12A-4C5F-B9F5-84936BF8242A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A170181-DE17-44AF-A5B2-449005F82E5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A170181-DE17-44AF-A5B2-449005F82E5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A170181-DE17-44AF-A5B2-449005F82E5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A170181-DE17-44AF-A5B2-449005F82E5C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1AD5E952-22F5-46F4-8215-7F0BA0A88216}
+	EndGlobalSection
+EndGlobal
