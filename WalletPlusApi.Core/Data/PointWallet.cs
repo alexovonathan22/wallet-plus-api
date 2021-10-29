@@ -12,5 +12,6 @@ namespace WalletPlusApi.Core.Data
         public int PointEarned { get; set; }
         [Column(TypeName = "decimal(18,2)")]
         public decimal MoneyValueForPointEarned { get; set; }
+        
     }
 }

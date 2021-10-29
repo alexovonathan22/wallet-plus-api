@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,39 +20,24 @@ namespace WalletPlusApi.Controllers
         {
             _customerService = customerService;
         }
-        // GET: api/<UserController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
+       
         // POST api/<UserController>
         [HttpPost(ApiRoutes.User.NewUser)]
+        [AllowAnonymous]
         public async Task<IActionResult> NewUser(CustomerDTO request)
         {
             var response = await _customerService.SignUp(request);
             if (response.Data != null) return Ok(response);
-            return BadRequest();
+            return BadRequest(response);
+        }
+        [HttpPost(ApiRoutes.User.Login)]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginDTO request)
+        {
+            var response = await _customerService.Login(request);
+            if (response.Data != null) return Ok(response);
+            return BadRequest(response);
         }
 
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

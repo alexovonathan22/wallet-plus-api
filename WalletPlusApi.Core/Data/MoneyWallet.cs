@@ -16,6 +16,6 @@ namespace WalletPlusApi.Core.Data
         //WalletId same as account number
         public string WalletId { get; set; } 
         public long CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

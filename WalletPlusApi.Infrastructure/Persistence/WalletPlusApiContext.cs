@@ -28,12 +28,22 @@ namespace WalletPlusApi.Infrastructure.Persistence
             base.OnModelCreating(modelBuilder);
 
             //custom logic
-            modelBuilder.Entity<Customer>().ToTable("Customers");
+            //modelBuilder.Entity<Customer>().ToTable("Customers");
             modelBuilder.Entity<MoneyWallet>().ToTable("MoneyWallets");
             modelBuilder.Entity<PointWallet>().ToTable("PointWallets");
-            modelBuilder.Entity<Transaction>().ToTable("WalletTransactions");
+            //modelBuilder.Entity<Transaction>().ToTable("WalletTransactions");
 
-
+            modelBuilder.Entity<MoneyWallet>().HasData(
+                new MoneyWallet
+                {
+                    WalletId = "123456778",
+                    BalanceAmount=0.00m,
+                    CreatedAt=DateTime.Now,
+                    LastUpdated=DateTime.Now,
+                    CustomerId=1,
+                    Id=1
+                }
+            );
         }
     }
 }

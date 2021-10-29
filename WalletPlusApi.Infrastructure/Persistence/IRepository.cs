@@ -24,7 +24,6 @@ namespace WalletPlusApi.Infrastructure.Persistence
         Task<TEntity> Get(Expression<Func<TEntity, bool>> where);
         Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> where);
         IQueryable<TEntity> Query();
-        Task Create(TEntity entity);
         Task Add(TEntity entity);
         Task AddRange(List<TEntity> entity);
         void Update(TEntity entity);
@@ -32,7 +31,7 @@ namespace WalletPlusApi.Infrastructure.Persistence
         Task Delete(TEntity entity);
         void DeleteRange(IEnumerable<TEntity> entities);
         Task SoftDelete(TEntity entity);
-        Task<bool> Save();
+        Task<(int id, bool IsSaved)> Save();
         void Dispose();
     }
 }

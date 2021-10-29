@@ -14,7 +14,11 @@ namespace WalletPlusApi.Core.Data
         public decimal Withdrawal { get; set; }
         [Column(TypeName = "decimal(18,2)")]
         public decimal Deposit { get; set; }
+        public string Status { get; set; }
+        public string TransRef { get; set; }
         public long BeneficiaryId { get; set; }
         public long DepositorId { get; set; } // when adding money if money is to self, both ids are the same.
+        public long CustomerId { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }
