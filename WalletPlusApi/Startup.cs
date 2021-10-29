@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -39,14 +41,16 @@ namespace WalletPlusApi
             var connstr = Configuration.GetSection("ConnectionStrings:Wallet.ConnectionString").Value;
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IWalletService, WalletService>();
+
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddDbContext<WalletPlusApiContext>(options => options.UseSqlServer(connstr, c => c.MigrationsAssembly("WalletPlusApi.Infrastructure")));
-
+            services.AddHttpContextAccessor();
 
 
             #region Auth/Auth Setup
 
-            services.AddAppAuthentication("");
+            services.AddAppAuthentication("3233r4tvb6un67ib67ve5");
             services.AddAuthorization(opt =>
             {
                 //Just the admin
@@ -68,6 +72,10 @@ namespace WalletPlusApi
 
             #endregion
             services.AddHttpContextAccessor();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc(ApiRoutes.Version, new OpenApiInfo { Title = "WalletPlusApi", Version = ApiRoutes.Version });
+            });
             services.AddControllers(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -75,11 +83,7 @@ namespace WalletPlusApi
                                  .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
             }
-            );
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc(ApiRoutes.Version, new OpenApiInfo { Title = "WalletPlusApi", Version = ApiRoutes.Version });
-            });
+            ).AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore); ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -82,11 +82,6 @@ namespace WalletPlusApi.Infrastructure.Persistence
                 .Where(where).ToListAsync();
         }
 
-        public async Task Create(TEntity entity)
-        {
-            await _dbContext.Set<TEntity>().AddAsync(entity);
-        }
-
         public async Task Add(TEntity entity)
         {
             await _dbContext.Set<TEntity>().AddAsync(entity);
@@ -126,9 +121,10 @@ namespace WalletPlusApi.Infrastructure.Persistence
             entity.DeletedAt = DateTime.Now;
             _dbContext.Set<TEntity>().Update(entity);
         }
-        public async Task<bool> Save()
+        public async Task<(int id, bool IsSaved)> Save()
         {
-            return await _dbContext.SaveChangesAsync(default) >= 0;
+            var id = await _dbContext.SaveChangesAsync(default);
+            return (id, id > 0);
         }
 
         public void DeleteRange(IEnumerable<TEntity> entities)

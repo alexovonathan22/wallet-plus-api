@@ -20,4 +20,10 @@ namespace WalletPlusApi.Core.Constants
         public const string Admin = "Administrator";
         public const string Customer = "Customer";
     }
+
+    public static class NumericConstants
+    {
+        // Active
+        public const int StringLength = 10;
+    }
 }

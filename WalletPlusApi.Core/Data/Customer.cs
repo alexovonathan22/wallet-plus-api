@@ -26,6 +26,8 @@ namespace WalletPlusApi.Core.Data
         public string SecretKey { get; set; }
         public string EncryptionKey { get; set; } // if time available send enc key n secret key to email.
         
-        public MoneyWallet CustomerWallet { get; set; }
+        public virtual MoneyWallet CustomerWallet { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
+
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WalletPlusApi.Infrastructure.Persistence;
 
 namespace WalletPlusApi.Infrastructure.Migrations
 {
     [DbContext(typeof(WalletPlusApiContext))]
-    partial class WalletPlusApiContextModelSnapshot : ModelSnapshot
+    [Migration("20211028232716_again")]
+    partial class again
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,20 +128,6 @@ namespace WalletPlusApi.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("MoneyWallets");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            BalanceAmount = 0.00m,
-                            CreatedAt = new DateTime(2021, 10, 29, 0, 41, 27, 277, DateTimeKind.Local).AddTicks(8833),
-                            CustomerId = 1L,
-                            IsActive = false,
-                            IsDeleted = false,
-                            IsVerified = false,
-                            LastUpdated = new DateTime(2021, 10, 29, 0, 41, 27, 278, DateTimeKind.Local).AddTicks(6439),
-                            WalletId = "123456778"
-                        });
                 });
 
             modelBuilder.Entity("WalletPlusApi.Core.Data.Transaction", b =>

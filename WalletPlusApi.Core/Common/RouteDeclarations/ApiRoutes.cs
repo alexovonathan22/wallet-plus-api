@@ -10,41 +10,26 @@ namespace WalletPlusApi.Core.Common.RouteDeclarations
     {
 
         public const string Version = "v1";
-        public const string BaseUrl = Version + "api/[controller]";
+        public const string BaseUrl = "api/[controller]";
 
         public static class User
         {
             #region Post
             public const string NewUser = BaseUrl + "/signup";
-            
+            public const string Login = BaseUrl + "/login";
             #endregion
-
-            #region Get
-            public const string NewMerchant = BaseUrl + "/";
-            #endregion
-            public const string TestWebHook = BaseUrl + "/notify";
         }
 
         public static class Wallet
         {
-            #region Post
-            public const string GetMerchant = BaseUrl + "/{id}/profile";
+            #region
+            public const string AddMoney = BaseUrl + "/add_money";
+            public const string SendMoney = BaseUrl + "/send_money";
+            public const string GetWalletTransactions = BaseUrl + "/transaction";
+            public const string GetWalletBalances = BaseUrl + "/balance";
+            public const string SpendMoney = BaseUrl + "/spend_money";
 
             #endregion
-            #region Get
-            public const string Rt = BaseUrl + "/{id}/profile";
-
-            #endregion
-        }
-
-        public static class Update
-        {
-
-        }
-
-        public static class Delete
-        {
-
         }
     }
 }

@@ -11,5 +11,6 @@ namespace WalletPlusApi.Infrastructure.Services.Interfaces
     public interface ICustomerService 
     {
         Task<BaseResponse> SignUp(CustomerDTO reqModel);
+        Task<BaseResponse> Login(LoginDTO reqModel);
     }
 }
