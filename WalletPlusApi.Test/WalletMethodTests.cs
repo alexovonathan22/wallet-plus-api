@@ -14,9 +14,11 @@ namespace WalletPlusApi.Test
 {
     public class WalletMethodTests
     {
+        private readonly Mock<IWalletService> _walletMock;
 
         public WalletMethodTests()
         {
+            _walletMock = new Mock<IWalletService>();
 
         }
 
@@ -36,7 +38,18 @@ namespace WalletPlusApi.Test
             Assert.Equal(expected, result);
         }
 
-       
+        [Theory]
+        [InlineData(999999, 100, true)]
+        [InlineData(50000, 100, false)]
+        public void Test_WalletBance_NotMore_Than_OneMillion(decimal walletAmt, decimal amtToAdd, bool expected)
+        {
+            //Act
+            var result = UtilMethods.CalculateIfValueGreaterThanOnemillion(walletAmt, amtToAdd);
+
+            //Assert
+            Assert.Equal(expected, result);
+        }
+
     }
 
    

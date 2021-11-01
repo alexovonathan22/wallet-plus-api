@@ -56,11 +56,15 @@ namespace WalletPlusApi.Infrastructure.Services.Implementation
             //If customer wants to add money to self use 3rdPartyService
             if (!string.IsNullOrEmpty(reqModel.DepositingWalletId))
             {
-                var reqTo3RDParty = _mock3RDPartyService.CompleteAddMoney(reqModel);
-                if (!reqTo3RDParty.Status) return Response.BadRequest(reqTo3RDParty);
                 var cstWallet1 = await _ptwalletrepo.Get(t => t.WalletId == reqModel.DepositingWalletId);
                 if (cstWallet1 == null) return Response.BadRequest(null);
+
+                if (UtilMethods.CalculateIfValueGreaterThanOnemillion(cstWallet1.BalanceAmount, reqModel.AmountToAdd)) return Response.BadRequest(null, $"Wallet balance cannot be more than USD 1m.");
+
+                var reqTo3RDParty = _mock3RDPartyService.CompleteAddMoney(reqModel);
+                if (!reqTo3RDParty.Status) return Response.BadRequest(reqTo3RDParty);
                 
+
                 cstWallet1.BalanceAmount += reqModel.AmountToAdd;
                 //calculate point earned
                 cstWallet1.PointEarned += pointCalc;

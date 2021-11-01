@@ -53,5 +53,11 @@ namespace WalletPlusApi.Core.Util
 
             return pointEarned;
         }
+
+        public static bool CalculateIfValueGreaterThanOnemillion(decimal walletAmt, decimal amountTobeAdded)
+        {
+            if (walletAmt <= 0 || amountTobeAdded <= 0) return false;
+            return (walletAmt += amountTobeAdded) > 1000000;
+        }
     }
 }
