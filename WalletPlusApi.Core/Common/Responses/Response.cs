@@ -20,9 +20,10 @@ namespace WalletPlusApi.Core.Common.Responses
                 Status = ResponseStatus.Success.Message,
                 RecordsRetrieved = recordsRetrieved,
                 TotalRecords = totalRecords,
-                NextSkipValue = skip,
-                PageSize = take,
-                CurrentSkipValue = skip - take
+                NextSkipValue = skip+take,
+                PageSize = recordsRetrieved,
+                CurrentSkipValue = skip,
+                Message=message
             };
         }
 
@@ -34,7 +35,8 @@ namespace WalletPlusApi.Core.Common.Responses
             {
                 StatusCode = ResponseStatus.Success.Code,
                 Data = obj,
-                Status = message,
+                Status = ResponseStatus.Success.Message,
+                Message = message
             };
         }
 
@@ -44,7 +46,8 @@ namespace WalletPlusApi.Core.Common.Responses
             return new BaseResponse()
             {
                 StatusCode = ResponseStatus.Success.Code,
-                Status = message,
+                Status = ResponseStatus.Success.Message,
+                Message = message,
                 Data = obj
             };
         }
@@ -56,7 +59,8 @@ namespace WalletPlusApi.Core.Common.Responses
             {
                 StatusCode = ResponseStatus.Fail.Code,
                 Data = obj,
-                Status = message,
+                Status = ResponseStatus.Fail.Message,
+                Message=message
             };
         }
         public static PaginatedResponse BadRequestObj(object obj = null, string message = "failed")
@@ -66,7 +70,8 @@ namespace WalletPlusApi.Core.Common.Responses
             {
                 StatusCode = ResponseStatus.Fail.Code,
                 Data = obj,
-                Status = message,
+                Status = ResponseStatus.Fail.Message,
+                Message = message
             };
         }
 

@@ -84,6 +84,20 @@ namespace WalletPlusApi.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CreatedAt = new DateTime(2021, 10, 31, 14, 49, 14, 592, DateTimeKind.Local).AddTicks(7170),
+                            Email = "great@gmail.com",
+                            FirstName = "ofe",
+                            IsActive = false,
+                            IsDeleted = false,
+                            IsVerified = false,
+                            LastName = "troy",
+                            LastUpdated = new DateTime(2021, 10, 31, 14, 49, 14, 593, DateTimeKind.Local).AddTicks(4881)
+                        });
                 });
 
             modelBuilder.Entity("WalletPlusApi.Core.Data.MoneyWallet", b =>
@@ -98,6 +112,9 @@ namespace WalletPlusApi.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("CurrencySymbol")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("CustomerId")
                         .HasColumnType("bigint");
@@ -132,12 +149,12 @@ namespace WalletPlusApi.Infrastructure.Migrations
                         {
                             Id = 1L,
                             BalanceAmount = 0.00m,
-                            CreatedAt = new DateTime(2021, 10, 29, 0, 41, 27, 277, DateTimeKind.Local).AddTicks(8833),
+                            CreatedAt = new DateTime(2021, 10, 31, 14, 49, 14, 594, DateTimeKind.Local).AddTicks(6693),
                             CustomerId = 1L,
                             IsActive = false,
                             IsDeleted = false,
                             IsVerified = false,
-                            LastUpdated = new DateTime(2021, 10, 29, 0, 41, 27, 278, DateTimeKind.Local).AddTicks(6439),
+                            LastUpdated = new DateTime(2021, 10, 31, 14, 49, 14, 594, DateTimeKind.Local).AddTicks(6702),
                             WalletId = "123456778"
                         });
                 });
@@ -148,6 +165,9 @@ namespace WalletPlusApi.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("AmountAdded")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<long>("BeneficiaryId")
                         .HasColumnType("bigint");
@@ -161,9 +181,6 @@ namespace WalletPlusApi.Infrastructure.Migrations
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Deposit")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<long>("DepositorId")
                         .HasColumnType("bigint");
 
@@ -176,17 +193,20 @@ namespace WalletPlusApi.Infrastructure.Migrations
                     b.Property<bool>("IsVerified")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsWithdrawal")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("LastUpdated")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TransRef")
+                    b.Property<string>("TopUpMode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Withdrawal")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("TransRef")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

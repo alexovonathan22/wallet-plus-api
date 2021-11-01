@@ -102,9 +102,9 @@ namespace WalletPlusApi.Infrastructure.Services.Implementation
             // Validate Email-add in-app
             var (IsValid, Email) = AuthUtil.ValidateEmail(model.Email);
 
-            if (model.Password.Length == 0)
+            if (!IsValid)
             {
-                return Response.BadRequest(null, $"Check password length.");
+                return Response.BadRequest(null, $"Email invalid.");
             }
 
             if (userExists == null)
@@ -118,8 +118,9 @@ namespace WalletPlusApi.Infrastructure.Services.Implementation
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Email = model.Email,
-                    SecretKey=UtilMethods.GenerateSecretkey(),
+                    SecretKey=$"WPlus- {UtilMethods.GenerateSecretkey()}",
                     LastUpdated=DateTime.Now,
+                    EncryptionKey=$"{UtilMethods.GenerateSecretkey()}",
                     PhoneNumber = model.PhoneNumber,
                     IsActive = true,
                     IsVerified=true 
@@ -146,8 +147,10 @@ namespace WalletPlusApi.Infrastructure.Services.Implementation
                 if (createdWallet != null)
                 {
                     var createCst = new CreateCustomerResponseDTO().PopulateDTO(model, createdWallet);
-                    createCst.EncryptedSecKey = customer.SecretKey;
-                    return Response.Ok(createCst, $"Customer {model.FirstName} created successfully.");
+                    createCst.EncryptedSecKey = customer.EncryptionKey;
+                    createCst.SecretKey = customer.SecretKey;
+
+                    return Response.Ok(createCst, $"Customer {model.FirstName} created successfully. \n {message}");
                 }
             }
             return Response.BadRequest(null, $"Something went wrong.");

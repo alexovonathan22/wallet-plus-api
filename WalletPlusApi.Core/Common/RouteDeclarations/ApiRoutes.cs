@@ -26,7 +26,7 @@ namespace WalletPlusApi.Core.Common.RouteDeclarations
             public const string AddMoney = BaseUrl + "/add_money";
             public const string SendMoney = BaseUrl + "/send_money";
             public const string GetWalletTransactions = BaseUrl + "/transaction";
-            public const string GetWalletBalances = BaseUrl + "/balance";
+            public const string GetWalletBalances = BaseUrl + "/balance/{walletbalance}/{pointbalance}";
             public const string SpendMoney = BaseUrl + "/spend_money";
 
             #endregion

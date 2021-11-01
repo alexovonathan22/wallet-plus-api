@@ -28,7 +28,7 @@ namespace WalletPlusApi.Infrastructure.Services.Interfaces
         /// To get transactions that have impacted a customer wallet
         /// </summary>
         /// <returns></returns>
-        Task<BaseResponse> GetWalletTransactions(); // remember to paginate
+        Task<BaseResponse> GetWalletTransactions(int skip, int take); // remember to paginate
         
         // depending on query params passed either to get amountBal or PointBal or Both
         Task<BaseResponse> GetWalletBalances(bool GetMoneyBalance, bool GetPointBalance); 

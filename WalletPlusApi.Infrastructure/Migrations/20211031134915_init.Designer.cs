@@ -10,8 +10,8 @@ using WalletPlusApi.Infrastructure.Persistence;
 namespace WalletPlusApi.Infrastructure.Migrations
 {
     [DbContext(typeof(WalletPlusApiContext))]
-    [Migration("20211028214040_walletId")]
-    partial class walletId
+    [Migration("20211031134915_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,6 +86,20 @@ namespace WalletPlusApi.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CreatedAt = new DateTime(2021, 10, 31, 14, 49, 14, 592, DateTimeKind.Local).AddTicks(7170),
+                            Email = "great@gmail.com",
+                            FirstName = "ofe",
+                            IsActive = false,
+                            IsDeleted = false,
+                            IsVerified = false,
+                            LastName = "troy",
+                            LastUpdated = new DateTime(2021, 10, 31, 14, 49, 14, 593, DateTimeKind.Local).AddTicks(4881)
+                        });
                 });
 
             modelBuilder.Entity("WalletPlusApi.Core.Data.MoneyWallet", b =>
@@ -100,6 +114,9 @@ namespace WalletPlusApi.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("CurrencySymbol")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("CustomerId")
                         .HasColumnType("bigint");
@@ -128,6 +145,20 @@ namespace WalletPlusApi.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("MoneyWallets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            BalanceAmount = 0.00m,
+                            CreatedAt = new DateTime(2021, 10, 31, 14, 49, 14, 594, DateTimeKind.Local).AddTicks(6693),
+                            CustomerId = 1L,
+                            IsActive = false,
+                            IsDeleted = false,
+                            IsVerified = false,
+                            LastUpdated = new DateTime(2021, 10, 31, 14, 49, 14, 594, DateTimeKind.Local).AddTicks(6702),
+                            WalletId = "123456778"
+                        });
                 });
 
             modelBuilder.Entity("WalletPlusApi.Core.Data.Transaction", b =>
@@ -137,17 +168,20 @@ namespace WalletPlusApi.Infrastructure.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<decimal>("AmountAdded")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<long>("BeneficiaryId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<long>("CustomerId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<decimal>("Deposit")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<long>("DepositorId")
                         .HasColumnType("bigint");
@@ -161,13 +195,24 @@ namespace WalletPlusApi.Infrastructure.Migrations
                     b.Property<bool>("IsVerified")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsWithdrawal")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("LastUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Withdrawal")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TopUpMode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransRef")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("WalletTransactions");
                 });
@@ -196,6 +241,17 @@ namespace WalletPlusApi.Infrastructure.Migrations
                     b.Navigation("Customer");
                 });
 
+            modelBuilder.Entity("WalletPlusApi.Core.Data.Transaction", b =>
+                {
+                    b.HasOne("WalletPlusApi.Core.Data.Customer", "Customer")
+                        .WithMany("Transactions")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
             modelBuilder.Entity("WalletPlusApi.Core.Data.PointWallet", b =>
                 {
                     b.HasOne("WalletPlusApi.Core.Data.MoneyWallet", null)
@@ -208,6 +264,8 @@ namespace WalletPlusApi.Infrastructure.Migrations
             modelBuilder.Entity("WalletPlusApi.Core.Data.Customer", b =>
                 {
                     b.Navigation("CustomerWallet");
+
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }

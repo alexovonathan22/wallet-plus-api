@@ -1,4 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -8,6 +10,8 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using WalletPlusApi.Core.Data;
+
 
 namespace WalletPlusApi.Core.Util
 {
@@ -126,5 +130,7 @@ namespace WalletPlusApi.Core.Util
                 return (IsValid: false, email: null);
             }
         }
+
+        
     }
 }

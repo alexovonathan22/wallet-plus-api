@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ using WalletPlusApi.Infrastructure.Services.Interfaces;
 namespace WalletPlusApi.Controllers
 {
     [ApiController]
+    [AllowAnonymous]
     public class WalletController : ControllerBase
     {
         private readonly IWalletService _walletService;
@@ -20,7 +22,6 @@ namespace WalletPlusApi.Controllers
             _walletService = walletService;
         }
         [HttpPost(ApiRoutes.Wallet.AddMoney)]
-        
         public async Task<IActionResult> AddMoney(AddMoneyDTO request)
         {
             var response = await _walletService.AddMoney(request);
@@ -31,6 +32,30 @@ namespace WalletPlusApi.Controllers
         public async Task<IActionResult> SendMoney(SendMoneyDTO request)
         {
             var response = await _walletService.SendMoney(request);
+            if (response.Data != null) return Ok(response);
+            return BadRequest(response);
+        }
+        // Return paginated data
+        [HttpGet(ApiRoutes.Wallet.GetWalletTransactions)]
+        public async Task<IActionResult> GetWalletsTrans(int skip=0, int take=10)
+        {
+            var response = await _walletService.GetWalletTransactions(skip, take);
+            if (response.Data != null) return Ok(response);
+            return NotFound(response);
+        }
+
+        [HttpGet(ApiRoutes.Wallet.GetWalletBalances)]
+        public async Task<IActionResult> GetWalletBalances(bool walletbalance, bool pointbalance)
+        {
+            var response = await _walletService.GetWalletBalances(walletbalance, pointbalance);
+            if (response.Data != null) return Ok(response);
+            return NotFound(response);
+        }
+
+        [HttpPost(ApiRoutes.Wallet.SpendMoney)]
+        public async Task<IActionResult> SpendMoney(SpendMoneyDTO reqModel)
+        {
+            var response = await _walletService.SpendMoney(reqModel);
             if (response.Data != null) return Ok(response);
             return BadRequest(response);
         }
