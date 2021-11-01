@@ -17,5 +17,6 @@ namespace WalletPlusApi.Core.Data
         public string WalletId { get; set; } 
         public long CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
+        public string CurrencySymbol { get; set; }
     }
 }

@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletPlusApi", "WalletPlus
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletPlusApi.Infrastructure", "WalletPlusApi.Infrastructure\WalletPlusApi.Infrastructure.csproj", "{5591C928-52F8-4FF8-9CFA-A17EF6F24D0E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletPlusApi.Tests", "WalletPlusApi.Tests\WalletPlusApi.Tests.csproj", "{A5BF53BF-A12A-4C5F-B9F5-84936BF8242A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletPlusApi.Core", "WalletPlusApi.Core\WalletPlusApi.Core.csproj", "{9A170181-DE17-44AF-A5B2-449005F82E5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletPlusApi.Core", "WalletPlusApi.Core\WalletPlusApi.Core.csproj", "{9A170181-DE17-44AF-A5B2-449005F82E5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletPlusApi.Test", "WalletPlusApi.Test\WalletPlusApi.Test.csproj", "{AC90F815-7666-42D9-9574-6B30F3830F76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +25,14 @@ Global
 		{5591C928-52F8-4FF8-9CFA-A17EF6F24D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5591C928-52F8-4FF8-9CFA-A17EF6F24D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5591C928-52F8-4FF8-9CFA-A17EF6F24D0E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A5BF53BF-A12A-4C5F-B9F5-84936BF8242A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A5BF53BF-A12A-4C5F-B9F5-84936BF8242A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A5BF53BF-A12A-4C5F-B9F5-84936BF8242A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A5BF53BF-A12A-4C5F-B9F5-84936BF8242A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9A170181-DE17-44AF-A5B2-449005F82E5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9A170181-DE17-44AF-A5B2-449005F82E5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A170181-DE17-44AF-A5B2-449005F82E5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A170181-DE17-44AF-A5B2-449005F82E5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC90F815-7666-42D9-9574-6B30F3830F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC90F815-7666-42D9-9574-6B30F3830F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC90F815-7666-42D9-9574-6B30F3830F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC90F815-7666-42D9-9574-6B30F3830F76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

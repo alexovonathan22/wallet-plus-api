@@ -12,6 +12,7 @@ namespace WalletPlusApi.Core.DTOs
         public string WalletId { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
+        public string SecretKey { get; set; }
         public string EncryptedSecKey { get; set; } // To be passed in header for every other request to the api asides login
         public string LastName { get; set; }
 

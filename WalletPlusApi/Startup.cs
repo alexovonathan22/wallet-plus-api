@@ -42,7 +42,8 @@ namespace WalletPlusApi
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IWalletService, WalletService>();
-
+            services.AddScoped<IMock3RDPartyService, Mock3RDPartyService>();
+            services.AddScoped<IBillerService, BillerService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddDbContext<WalletPlusApiContext>(options => options.UseSqlServer(connstr, c => c.MigrationsAssembly("WalletPlusApi.Infrastructure")));
             services.AddHttpContextAccessor();
@@ -51,24 +52,7 @@ namespace WalletPlusApi
             #region Auth/Auth Setup
 
             services.AddAppAuthentication("3233r4tvb6un67ib67ve5");
-            services.AddAuthorization(opt =>
-            {
-                //Just the admin
-                opt.AddPolicy(AuthorizedUserTypes.Admin, policy =>
-
-                policy.RequireRole(Roles.Admin));
-
-                // Just the user
-                opt.AddPolicy(AuthorizedUserTypes.Customer, policy =>
-
-                policy.RequireRole(Roles.Customer));
-                // user and admin
-                opt.AddPolicy(AuthorizedUserTypes.UserAndAdmin, policy =>
-
-                policy.RequireRole(Roles.Customer, Roles.Admin));
-
-
-            });
+            
 
             #endregion
             services.AddHttpContextAccessor();
@@ -99,7 +83,7 @@ namespace WalletPlusApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
